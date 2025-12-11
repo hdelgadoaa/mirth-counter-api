@@ -1,10 +1,15 @@
 from flask import Flask, jsonify
 from collections import defaultdict
+from threading import Lock
+from flask_cors import CORS
 import json
 import os
-from threading import Lock
 
 app = Flask(__name__)
+
+# Habilitar CORS para que GitHub Pages pueda llamar a la API
+# Permite cualquier origen sobre todos los endpoints (simple para este caso)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 COUNTERS_FILE = "counters.json"
 lock = Lock()
